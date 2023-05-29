@@ -84,7 +84,9 @@ const updateFlower = async (req, res) => {
   if (!flower) {
     return res.status(400).json({error: 'No such flower'})
   }
-  res.status(200).json(flower)
+
+  const resflower = await Flower.findById(id)
+  res.status(200).json(resflower)
 }
 
 module.exports = {
