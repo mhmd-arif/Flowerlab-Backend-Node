@@ -10,26 +10,40 @@ const getFlowers = async (req, res) => {
 
 // get a single flower
 const getFlower = async (req, res) => {
-    const { genus } = req.params
-    try {
-        const flower = await Flower.find({genus:[genus]})
-        if (!flower) {
-        return res.status(404).json({error: 'No such flower'})
-        }
+    // const { genus } = req.params
+    // try {
+    //     const flower = await Flower.find({genus:[genus]})
+    //     if (!flower) {
+    //     return res.status(404).json({error: 'No such flower'})
+    //     }
 
-        res.status(200).json(flower)
-        } catch (err) {
-        next(err);
+    //     res.status(200).json(flower) 
+    //     } catch (err) {
+    //     next(err);
+    // }
+
+    const { id } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({error: 'No such flower'})
     }
+
+    const flower = await Flower.findById(id)
+
+    if (!flower) {
+      return res.status(404).json({error: 'No such flower'})
+    }
+
+    res.status(200).json(flower)
 }
 
 // create a new flower
 const createFlower = async (req, res) => {
-  const {genus, family, description, imageCover } = req.body
+  const {genus, family, description, price, imageCover } = req.body
 
   // add to the database
   try {
-    const flower = await Flower.create({ genus, family, description, imageCover })
+    const flower = await Flower.create({ genus, family, description, price, imageCover })
     res.status(200).json(flower)
   } catch (error) {
     res.status(400).json({ error: error.message })
@@ -70,9 +84,7 @@ const updateFlower = async (req, res) => {
   if (!flower) {
     return res.status(400).json({error: 'No such flower'})
   }
-  const resflower = await Flower.findById(id)
-
-  res.status(200).json(resflower)
+  res.status(200).json(flower)
 }
 
 module.exports = {

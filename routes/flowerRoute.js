@@ -13,7 +13,7 @@ const router = express.Router()
 router.get('/', getFlowers)
 
 // GET a single Flower
-router.get('/:genus', getFlower)
+router.get('/:id', getFlower)
 
 // POST a new Flower
 router.post('/', createFlower)

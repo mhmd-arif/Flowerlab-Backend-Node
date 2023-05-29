@@ -15,6 +15,10 @@ const flowerSchema = new Schema({
       type: String,
       required: [true, 'must include flower description'],
     },
+    price: {
+      type: Number,
+      required: [true, 'must include flower price'],
+    },
     imageCover: {
       type: String,
       required: [true, 'must include flower image'],
