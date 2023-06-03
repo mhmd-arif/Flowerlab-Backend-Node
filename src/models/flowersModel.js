@@ -1,8 +1,6 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 
-const Schema = mongoose.Schema
-
-const flowerSchema = new Schema({
+const flowerSchema = new mongoose.Schema({
     genus: {
       type: String,
       required: [true, 'must include flower genus'],
@@ -25,4 +23,6 @@ const flowerSchema = new Schema({
     }
   }, { timestamps: true })
   
-  module.exports = mongoose.model('flower', flowerSchema)
+  const Flower = mongoose.model('Flower', flowerSchema);
+
+  export default Flower;
