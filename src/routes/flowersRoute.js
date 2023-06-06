@@ -11,12 +11,12 @@ router.get('/', controller.findAll);
 router.get('/:id', controller.findById);
 
 // create flower
-router.post('/', auth.authenticate, controller.create);
+router.post('/', controller.create);
 
 // update flower
-router.put('/:id', auth.authenticate, controller.updateById);
+router.put('/:id', controller.updateById);
 
 // delete flower
-router.delete('/:id', auth.authenticate, controller.deleteById);
+router.delete('/:id', controller.deleteById);
 
 export default router;
